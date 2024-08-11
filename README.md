@@ -4,9 +4,13 @@ Powered by Google's state-of-the-art generative AI model; the Gemini
 
 ## Screenshots
 
-<img src="screenshots/screenshot1.jpg" alt="Screenshot1">
-<img src="screenshots/screenshot2.jpg" alt="Screenshot2">
-<img src="screenshots/screenshot3.jpg" alt="Screenshot3">
+<div style="width:100%; display:flex; justify-content:space-between;">
+
+[<img src="screenshots/screenshot1.jpg" width=24% alt="Chat">](screenshots/screenshot1.jpg)
+[<img src="screenshots/screenshot2.jpg" width=24% alt="Generate">](screenshots/screenshot2.jpg)
+[<img src="screenshots/screenshot3.jpg" width=24% alt="Prompts">](screenshots/screenshot3.jpg)
+
+</div>
 
 ## Features
 
@@ -15,6 +19,6 @@ This sample showcases the following API capability:
 * Image Reasoning - Object identifier, Recipe creator...
 * Chat - AI assistant, Brainstorm...
 
-## Google Play Store
+## App Link
 
-You can download from [here](https://play.google.com/store/apps/details?id=com.nilearning.ai.pisces).
+You can download from [Google Play store](https://play.google.com/store/apps/details?id=com.nilearning.ai.pisces).
