@@ -1,0 +1,71 @@
+<!--
+  ~ Copyright 2024 NIlearning
+  ~
+  ~  Showcase app for Gemini Pro Implementation with Jetpack Compose
+  ~
+  ~  Last modified 11/02/2024, 21:27
+  -->
+<resources>
+    <string name="app_name">Pisces AI</string>
+    <string name="action_go">Go</string>
+    <string name="action_clear">Clear</string>
+    <string name="action_try">Try it</string>
+
+    <!-- Menu strings -->
+    <string name="menu_summarize_title">Summarize (TL;DR)</string>
+    <string name="menu_summarize_description">Extract key points from long text</string>
+
+    <string name="menu_speech_title">Speech</string>
+    <string name="menu_speech_description">Convey a thought effectively</string>
+
+    <string name="menu_story_title">Story</string>
+    <string name="menu_story_description">Generate a story from a subject</string>
+
+    <string name="menu_code_title">Write a code</string>
+    <string name="menu_code_description">Write a simple application code</string>
+
+    <string name="menu_slogan_title">Slogan</string>
+    <string name="menu_slogan_description">Create an appealing slogan for your business</string>
+
+    <string name="menu_promote_title">Advertisement</string>
+    <string name="menu_promote_description">Promote a product, service or brand</string>
+
+    <string name="menu_joke_title">Tell a joke</string>
+    <string name="menu_joke_description">Write a funny jokes to tell your friends</string>
+
+    <string name="menu_free_description">Explore with your own prompt ideas</string>
+
+    <string name="image_reason_title">Analyze image(s)</string>
+    <string name="image_reason_description">Get reasoning and analysis about image(s)</string>
+
+    <string name="image_caption_title">Caption</string>
+    <string name="image_caption_description">Write a caption for image(s)</string>
+
+    <string name="image_info_title">Image explanation</string>
+    <string name="image_info_description">Extract information about image(s)</string>
+
+    <string name="summarize_tab">Prompts</string>
+    <string name="reason_tab">Multimodal</string>
+    <string name="chat_tab">Chat</string>
+
+    <!-- Summarize sample strings -->
+    <string name="summarize_label">Text</string>
+    <string name="summarize_hint">Enter a subject</string>
+
+    <!-- Photo Reasoning sample strings -->
+    <string name="reason_label">Task</string>
+    <string name="reason_hint">Upload an image to proceed</string>
+    <string name="add_image">Add Image</string>
+
+    <!-- Chat sample strings -->
+    <string name="chat_label">Message</string>
+    <string name="action_send">Send</string>
+    <string name="copy">Copied</string>
+
+    <!-- Nav strings -->
+    <string name="check_pro">Work Offline</string>
+    <string name="check_pro_message">Pisces AI: Offline version coming soon..</string>
+    <string name="write_review">Write review</string>
+    <string name="by_company">by NIlearning</string>
+    <string name="powered_by">Powered by\: Gemini 1.5 Flash</string>
+</resources>

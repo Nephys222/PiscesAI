@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2024 NIlearning
+  ~
+  ~  Showcase app for Gemini Pro Implementation with Jetpack Compose
+  ~
+  ~  Last modified 11/02/2024, 21:27
+  -->
+
+<resources>
+    <color name="ic_launcher_background">#01214A</color>
+</resources>
