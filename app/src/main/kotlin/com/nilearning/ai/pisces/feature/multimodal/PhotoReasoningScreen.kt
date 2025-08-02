@@ -34,7 +34,6 @@ import androidx.compose.material.icons.outlined.Clear
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -287,7 +286,7 @@ fun PhotoReasoningScreen(
                                 }
                         )
                         MarkdownText(
-                            markdown = uiState.outputText, // TODO(thatfiredev): Figure out Markdown support
+                            markdown = uiState.outputText, // Markdown supported
                             color = MaterialTheme.colorScheme.onSecondary,
                             fontSize = 16.sp,
                             modifier = Modifier

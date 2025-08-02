@@ -77,7 +77,7 @@ class ChatViewModel(
                 _uiState.value.replaceLastPendingMessage()
                 _uiState.value.addMessage(
                     ChatMessage(
-                        text = e.localizedMessage,
+                        text = e.localizedMessage ?: "An Unknown error",
                         participant = Participant.ERROR
                     )
                 )

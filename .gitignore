@@ -5,6 +5,7 @@ build/
 # Local configuration file (sdk path, etc)
 local.properties
 keystore.properties
+keys/
 
 # Log/OS Files
 *.log
@@ -24,6 +25,7 @@ release/
 # Keystore files
 *.jks
 *.keystore
+.aiexclude
 
 # Google Services (e.g. APIs or Firebase)
 google-services.json

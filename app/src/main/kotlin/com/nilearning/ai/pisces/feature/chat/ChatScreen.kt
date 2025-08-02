@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
@@ -27,15 +28,12 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.Send
 import androidx.compose.material.icons.automirrored.outlined.Send
 import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ElevatedCard
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -60,10 +58,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.nilearning.ai.pisces.GenerativeViewModelFactory
-import com.nilearning.ai.pisces.ui.theme.GenerativeAISample
 import com.meetup.twain.MarkdownText
+import com.nilearning.ai.pisces.GenerativeViewModelFactory
 import com.nilearning.ai.pisces.R
+import com.nilearning.ai.pisces.ui.theme.GenerativeAISample
 import com.nilearning.ai.pisces.util.ClipboardHelper
 import kotlinx.coroutines.launch
 
@@ -182,7 +180,7 @@ fun ChatBubbleItem(
                         .indication(interactionCard, LocalIndication.current),
                 ) {
                     MarkdownText(
-                        markdown = chatMessage.text, // TODO(thatfiredev): Figure out Markdown support
+                        markdown = chatMessage.text, // Markdown supported
                         fontSize = 16.sp,
                         color = textColor,
                         modifier = Modifier.padding(16.dp)
@@ -216,6 +214,7 @@ fun MessageInput(
             modifier = Modifier
                 .padding(start = 16.dp, top = 8.dp, end = 16.dp, bottom = 0.dp)
                 .fillMaxWidth()
+//                .imePadding()
         ) {
             OutlinedTextField(
                 value = userMessage,

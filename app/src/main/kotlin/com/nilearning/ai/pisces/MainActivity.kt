@@ -9,7 +9,6 @@
 package com.nilearning.ai.pisces
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.compose.setContent
@@ -21,15 +20,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.ime
+import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.union
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.outlined.ShoppingCart
@@ -43,6 +47,9 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
@@ -84,6 +91,7 @@ import com.nilearning.ai.pisces.feature.PromptsRoute
 import com.nilearning.ai.pisces.feature.chat.ChatRoute
 import com.nilearning.ai.pisces.ui.theme.GenerativeAISample
 import kotlinx.coroutines.launch
+import androidx.core.net.toUri
 
 class MainActivity : AppCompatActivity() {
 
@@ -202,7 +210,7 @@ class MainActivity : AppCompatActivity() {
                                     selected = false,
                                     shape = RoundedCornerShape(4.dp),
                                     onClick = {
-                                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$packageName"))
+                                        val intent = Intent(Intent.ACTION_VIEW, "https://play.google.com/store/apps/details?id=$packageName".toUri())
                                         startActivity(intent)
                                         scope.launch {
                                             drawerState.close()
@@ -290,35 +298,48 @@ class MainActivity : AppCompatActivity() {
                                 )
                             },
                             bottomBar = {
-                                BottomNavigation (
-                                    modifier = Modifier.fillMaxWidth(),
-                                    backgroundColor = MaterialTheme.colorScheme.primaryContainer
+                                Box(
+                                    modifier = Modifier
+                                        .background(MaterialTheme.colorScheme.primaryContainer)
                                 ) {
-                                    val navBackStackEntry by navController.currentBackStackEntryAsState()
-                                    val currentDestination = navBackStackEntry?.destination
-                                    items.forEach { screen ->
-                                        val isSelected = currentDestination?.hierarchy?.any {  it.route == screen.route } == true
-                                        BottomNavigationItem(
-                                            icon = { Icon(ImageVector.vectorResource(id = if (isSelected) screen.iconFill else screen.iconLine),
-                                                tint = MaterialTheme.colorScheme.primary, contentDescription = null) },
-                                            label = { Text(stringResource(screen.resourceId), fontSize = 12.sp, color = MaterialTheme.colorScheme.primary) },
-                                            selected = isSelected,
-                                            onClick = {
-                                                navController.navigate(screen.route) {
-                                                    // Pop up to the start destination of the graph to
-                                                    // avoid building up a large stack of destinations
-                                                    // on the back stack as users select items
-                                                    popUpTo(navController.graph.findStartDestination().id) {
-                                                        saveState = true
+                                    NavigationBar (
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .windowInsetsPadding(
+                                                WindowInsets.ime.union(WindowInsets.navigationBars)
+                                            )
+                                            .navigationBarsPadding(),
+                                        containerColor = MaterialTheme.colorScheme.primaryContainer,
+                                    ) {
+                                        val navBackStackEntry by navController.currentBackStackEntryAsState()
+                                        val currentDestination = navBackStackEntry?.destination
+                                        items.forEach { screen ->
+                                            val isSelected = currentDestination?.hierarchy?.any {  it.route == screen.route } == true
+                                            NavigationBarItem(
+                                                icon = { Icon(ImageVector.vectorResource(id = if (isSelected) screen.iconFill else screen.iconLine),
+                                                    tint = MaterialTheme.colorScheme.primary, contentDescription = null) },
+                                                label = { Text(stringResource(screen.resourceId), fontSize = 12.sp, color = MaterialTheme.colorScheme.primary) },
+                                                selected = isSelected,
+                                                colors = NavigationBarItemDefaults.colors(
+                                                    indicatorColor = Color.Transparent
+                                                ),
+                                                onClick = {
+                                                    navController.navigate(screen.route) {
+                                                        // Pop up to the start destination of the graph to
+                                                        // avoid building up a large stack of destinations
+                                                        // on the back stack as users select items
+                                                        popUpTo(navController.graph.findStartDestination().id) {
+                                                            saveState = true
+                                                        }
+                                                        // Avoid multiple copies of the same destination when
+                                                        // re-selecting the same item
+                                                        launchSingleTop = true
+                                                        // Restore state when re-selecting a previously selected item
+                                                        restoreState = true
                                                     }
-                                                    // Avoid multiple copies of the same destination when
-                                                    // re-selecting the same item
-                                                    launchSingleTop = true
-                                                    // Restore state when re-selecting a previously selected item
-                                                    restoreState = true
                                                 }
-                                            }
-                                        )
+                                            )
+                                        }
                                     }
                                 }
                             }

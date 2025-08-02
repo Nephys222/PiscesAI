@@ -6,7 +6,6 @@
   ~  Last modified 11/02/2024, 21:27
   -->
 <resources>
-    <string name="app_name">Pisces AI</string>
     <string name="action_go">Go</string>
     <string name="action_clear">Clear</string>
     <string name="action_try">Try it</string>
@@ -67,5 +66,5 @@
     <string name="check_pro_message">Pisces AI: Offline version coming soon..</string>
     <string name="write_review">Write review</string>
     <string name="by_company">by NIlearning</string>
-    <string name="powered_by">Powered by\: Gemini 1.5 Flash</string>
+    <string name="powered_by">Powered by\: Gemini 2.5 Flash</string>
 </resources>

@@ -200,7 +200,7 @@ fun PromptScreen(
                                 }
                         )
                         MarkdownText(
-                            markdown = uiState.outputText, // TODO(thatfiredev): Figure out Markdown support
+                            markdown = uiState.outputText, // Markdown supported
                             color = MaterialTheme.colorScheme.onSecondary,
                             fontSize = 16.sp,
                             modifier = Modifier

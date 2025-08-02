@@ -9,6 +9,7 @@
 package com.nilearning.ai.pisces.feature.chat
 
 import androidx.compose.runtime.toMutableStateList
+import com.nilearning.ai.pisces.util.removeLastCompat
 
 class ChatUiState(
     messages: List<ChatMessage> = emptyList()
@@ -24,7 +25,7 @@ class ChatUiState(
         val lastMessage = _messages.lastOrNull()
         lastMessage?.let {
             val newMessage = lastMessage.apply { isPending = false }
-            _messages.removeLast()
+            _messages.removeLastCompat()
             _messages.add(newMessage)
         }
     }
