@@ -18,6 +18,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
@@ -26,6 +27,7 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -69,6 +71,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -92,7 +96,10 @@ import com.nilearning.ai.pisces.feature.chat.ChatRoute
 import com.nilearning.ai.pisces.ui.theme.GenerativeAISample
 import kotlinx.coroutines.launch
 import androidx.core.net.toUri
+import com.nilearning.ai.pisces.feature.NanoRoute
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     sealed class Screen(val route: String,
@@ -115,12 +122,18 @@ class MainActivity : AppCompatActivity() {
             R.drawable.ic_images,
             R.drawable.ic_images_fill
         )
+        data object Nano : Screen("nano",
+            R.string.nano_tab,
+            R.drawable.ic_experiment,
+            R.drawable.ic_experiment_fill
+        )
     }
 
     private val items = listOf(
         Screen.Chat,
         Screen.Summarize,
-        Screen.Photo
+        Screen.Photo,
+        Screen.Nano
     )
 
     object ThemeState {
@@ -226,7 +239,14 @@ class MainActivity : AppCompatActivity() {
                                     onClick = {
                                         scope.launch {
                                             drawerState.close()
-                                            snackbarHostState.showSnackbar(message = getString(R.string.check_pro_message), duration = SnackbarDuration.Short)
+                                            navController.navigate(Screen.Nano.route) {
+                                                popUpTo(navController.graph.findStartDestination().id) {
+                                                    saveState = true
+                                                }
+                                                launchSingleTop = true
+                                                restoreState = true
+                                            }
+//                                            snackbarHostState.showSnackbar(message = getString(R.string.check_pro_message), duration = SnackbarDuration.Short)
                                         }
                                     }
                                 )
@@ -252,12 +272,20 @@ class MainActivity : AppCompatActivity() {
                                         titleContentColor = MaterialTheme.colorScheme.primary,
                                     ),
                                     title = {
-                                        Text(
-                                            text = stringResource(id = R.string.app_name),
-                                            fontSize = 24.sp,
-                                            color = MaterialTheme.colorScheme.primary,
-                                            maxLines = 1,
-                                            overflow = TextOverflow.Ellipsis
+                                        //                                        Text(
+//                                            text = stringResource(id = R.string.app_name),
+//                                            fontSize = 24.sp,
+//                                            color = MaterialTheme.colorScheme.primary,
+//                                            maxLines = 1,
+//                                            overflow = TextOverflow.Ellipsis
+//                                        )
+                                        Image(
+                                            painter = painterResource(R.drawable.ic_logo),
+                                            contentDescription = stringResource(id = R.string.app_name),
+                                            modifier = Modifier
+                                                .fillMaxWidth()
+                                                .height(42.dp),
+                                            contentScale = ContentScale.Fit
                                         )
                                     },
                                     navigationIcon = {
@@ -348,6 +376,7 @@ class MainActivity : AppCompatActivity() {
                                 composable(Screen.Chat.route) { ChatRoute() }
                                 composable(Screen.Summarize.route) { PromptsRoute(rememberNavController()) }
                                 composable(Screen.Photo.route) { MultimodalRoute(rememberNavController()) }
+                                composable(Screen.Nano.route) { NanoRoute(rememberNavController()) }
                             }
                         }
                     }
