@@ -38,6 +38,7 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.outlined.CheckCircle
 import androidx.compose.material.icons.outlined.ShoppingCart
 import androidx.compose.material.icons.outlined.ThumbUp
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -53,6 +54,7 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.NavigationDrawerItem
+import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
@@ -217,11 +219,12 @@ class MainActivity : AppCompatActivity() {
                                 DrawerHeader()
                                 HorizontalDivider(thickness = 16.dp, color = MaterialTheme.colorScheme.onTertiary)
                                 NavigationDrawerItem(
-                                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 16.dp),
+                                    modifier = Modifier.padding(start = 8.dp, end = 8.dp, top = 16.dp, bottom = 8.dp),
                                     label = { Text(text = stringResource(id = R.string.write_review), modifier = Modifier.padding(start = 4.dp), fontSize = 16.sp, color = MaterialTheme.colorScheme.onSecondaryContainer) },
                                     badge = { Icon(imageVector =Icons.Outlined.ThumbUp, tint = MaterialTheme.colorScheme.onSecondaryContainer, contentDescription = null ) },
                                     selected = false,
                                     shape = RoundedCornerShape(4.dp),
+                                    colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = MaterialTheme.colorScheme.surfaceVariant),
                                     onClick = {
                                         val intent = Intent(Intent.ACTION_VIEW, "https://play.google.com/store/apps/details?id=$packageName".toUri())
                                         startActivity(intent)
@@ -231,11 +234,12 @@ class MainActivity : AppCompatActivity() {
                                     }
                                 )
                                 NavigationDrawerItem(
-                                    modifier = Modifier.padding(horizontal = 8.dp),
-                                    label = { Text(text = stringResource(id = R.string.check_pro), modifier = Modifier.padding(start = 4.dp), fontSize = 16.sp, color = MaterialTheme.colorScheme.onTertiaryContainer) },
-                                    badge = { Icon(imageVector =Icons.Outlined.ShoppingCart , tint = MaterialTheme.colorScheme.onTertiaryContainer, contentDescription = null ) },
+                                    modifier = Modifier.padding(start = 8.dp, end = 8.dp, top = 8.dp, bottom = 8.dp),
+                                    label = { Text(text = stringResource(id = R.string.work_offline), modifier = Modifier.padding(start = 4.dp), fontSize = 16.sp, color = MaterialTheme.colorScheme.onSecondaryContainer) },
+                                    badge = { Icon(imageVector =Icons.Outlined.CheckCircle , tint = MaterialTheme.colorScheme.onSecondaryContainer, contentDescription = null ) },
                                     selected = false,
                                     shape = RoundedCornerShape(4.dp),
+                                    colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = MaterialTheme.colorScheme.surfaceVariant),
                                     onClick = {
                                         scope.launch {
                                             drawerState.close()
@@ -246,7 +250,20 @@ class MainActivity : AppCompatActivity() {
                                                 launchSingleTop = true
                                                 restoreState = true
                                             }
-//                                            snackbarHostState.showSnackbar(message = getString(R.string.check_pro_message), duration = SnackbarDuration.Short)
+                                        }
+                                    }
+                                )
+                                NavigationDrawerItem(
+                                    modifier = Modifier.padding(start = 8.dp, end = 8.dp, top = 8.dp, bottom = 8.dp),
+                                    label = { Text(text = stringResource(id = R.string.check_pro), modifier = Modifier.padding(start = 4.dp), fontSize = 16.sp, color = MaterialTheme.colorScheme.onTertiaryContainer) },
+                                    badge = { Icon(imageVector =Icons.Outlined.ShoppingCart , tint = MaterialTheme.colorScheme.onTertiaryContainer, contentDescription = null ) },
+                                    selected = false,
+                                    shape = RoundedCornerShape(4.dp),
+                                    colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = MaterialTheme.colorScheme.surfaceVariant),
+                                    onClick = {
+                                        scope.launch {
+                                            drawerState.close()
+                                            snackbarHostState.showSnackbar(message = getString(R.string.check_pro_message), duration = SnackbarDuration.Short)
                                         }
                                     }
                                 )
@@ -272,7 +289,7 @@ class MainActivity : AppCompatActivity() {
                                         titleContentColor = MaterialTheme.colorScheme.primary,
                                     ),
                                     title = {
-                                        //                                        Text(
+//                                        Text(
 //                                            text = stringResource(id = R.string.app_name),
 //                                            fontSize = 24.sp,
 //                                            color = MaterialTheme.colorScheme.primary,

@@ -100,8 +100,9 @@
     <string name="redirect_link">" this link."</string>
 
     <!-- Nav strings -->
-    <string name="check_pro">Work Offline</string>
-    <string name="check_pro_message">Pisces AI: Offline version coming soon..</string>
+    <string name="work_offline">Work Offline</string>
+    <string name="check_pro">Generate Video</string>
+    <string name="check_pro_message">Pisces AI: Video generator coming soon..</string>
     <string name="write_review">Write review</string>
     <string name="by_company">by NIlearning</string>
     <string name="powered_by">Powered by\: Gemini 2.5 Flash</string>
